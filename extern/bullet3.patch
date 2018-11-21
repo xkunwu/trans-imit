@@ -1,0 +1,26 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 68e0a93bc..ee28d3008 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -179,7 +179,9 @@ IF (INTERNAL_CREATE_DISTRIBUTABLE_MSVC_PROJECTFILES)
+ 	SET( CMAKE_RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL ${BULLET_PHYSICS_SOURCE_DIR})
+ 	SET( CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO ${BULLET_PHYSICS_SOURCE_DIR})
+ ELSE()
+-	SET (LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib CACHE PATH "Single output directory for building all libraries.")
++    SET (CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib CACHE PATH "Single output directory for building all libraries.")
++    SET (CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib CACHE PATH "Single output directory for building all libraries.")
++    SET (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin CACHE PATH "Single output directory for building all libraries.")
+ ENDIF()
+ 
+ 
+@@ -200,6 +202,10 @@ SET(CMAKE_SUPPRESS_REGENERATION  1)
+ SET(CMAKE_USE_RELATIVE_PATHS 1)
+ ENDIF(INTERNAL_CREATE_MSVC_RELATIVE_PATH_PROJECTFILES)
+ 
++ELSE (WIN32)
++    SET (CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib CACHE PATH "Single output directory for building all libraries.")
++    SET (CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib CACHE PATH "Single output directory for building all libraries.")
++    SET (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin CACHE PATH "Single output directory for building all libraries.")
+ ENDIF (WIN32)
+ 
+ 
